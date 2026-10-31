@@ -1,0 +1,17 @@
+def plural(word):
+    if word.endswith("ch") or word.endswith("sh") or word.endswith("x"):
+        return word + "es"
+
+    elif word.endswith("y"):
+        return word[:-1] + "ies"
+
+    else:
+        return word + "s"
+
+
+words = ["cat", "box", "baby", "book", "brush"]
+
+print("Singular to Plural Forms:")
+
+for word in words:
+    print(word, "->", plural(word))
