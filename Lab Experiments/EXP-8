@@ -1,0 +1,30 @@
+from nltk.probability import ConditionalFreqDist
+
+training_data = [
+    [("The", "DT"), ("boy", "NN"), ("plays", "VBZ")],
+    [("The", "DT"), ("girl", "NN"), ("plays", "VBZ")],
+    [("A", "DT"), ("boy", "NN"), ("runs", "VBZ")],
+    [("A", "DT"), ("girl", "NN"), ("runs", "VBZ")]
+]
+
+word_tag = ConditionalFreqDist()
+
+for sentence in training_data:
+    for word, tag in sentence:
+        word_tag[word.lower()][tag] += 1
+
+def pos_tagging(words):
+    for word in words:
+        tags = word_tag[word.lower()]
+
+        if tags:
+            tag = tags.max()
+        else:
+            tag = "Unknown"
+
+        print(word, ":", tag)
+
+text = ["The", "boy", "plays"]
+
+print("Stochastic POS Tagging:")
+pos_tagging(text)
