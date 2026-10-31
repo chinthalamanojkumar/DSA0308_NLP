@@ -1,0 +1,26 @@
+
+from nltk import bigrams, word_tokenize
+from collections import defaultdict
+import random
+
+text = "I love Python. I love programming. Python is easy."
+
+words = word_tokenize(text.lower())
+
+bigram_list = list(bigrams(words))
+
+model = defaultdict(list)
+
+for w1, w2 in bigram_list:
+    model[w1].append(w2)
+
+word = "i"
+
+print("Generated Text:")
+
+for i in range(8):
+    print(word, end=" ")
+    if word in model:
+        word = random.choice(model[word])
+    else:
+        break
