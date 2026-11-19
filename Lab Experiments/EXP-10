@@ -1,0 +1,29 @@
+
+import nltk
+from nltk.tag import RegexpTagger, brill, brill_trainer
+
+text = "The cat is playing"
+
+words = nltk.word_tokenize(text)
+
+patterns = [
+    (r'.*ing$', 'VBG'),
+    (r'.*', 'NN')
+]
+
+initial_tagger = RegexpTagger(patterns)
+
+training_data = [
+    [(('The', 'DT')), (('cat', 'NN')), (('is', 'VBZ')), (('playing', 'VBG'))],
+    [(('The', 'DT')), (('dog', 'NN')), (('is', 'VBZ')), (('running', 'VBG'))]
+]
+
+templates = brill.brill24()
+trainer = brill_trainer.BrillTaggerTrainer(
+    initial_tagger, templates, trace=0
+)
+
+tagger = trainer.train(training_data, max_rules=10)
+
+print("Original Text:", text)
+print("Tagged Output:", tagger.tag(words))
