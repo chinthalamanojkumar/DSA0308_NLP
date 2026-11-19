@@ -1,0 +1,27 @@
+
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.tag import RegexpTagger
+
+nltk.download('punkt')
+nltk.download('punkt_tab')
+
+text = "The boy plays cricket and the girl sings songs"
+
+patterns = [
+    (r'.*ing$', 'VBG'),
+    (r'.*ed$', 'VBD'),
+    (r'.*es$', 'VBZ'),
+    (r'.*s$', 'NNS'),
+    (r'.*', 'NN')
+]
+
+tagger = RegexpTagger(patterns)
+
+words = word_tokenize(text)
+
+result = tagger.tag(words)
+
+print("Original Text:", text)
+print("POS Tags:")
+print(result)
