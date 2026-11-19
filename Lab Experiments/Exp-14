@@ -1,0 +1,27 @@
+
+import nltk
+
+grammar = nltk.CFG.fromstring("""
+S -> NP_SG VP_SG | NP_PL VP_PL
+NP_SG -> Det_SG N_SG
+NP_PL -> Det_PL N_PL
+VP_SG -> V_SG
+VP_PL -> V_PL
+Det_SG -> 'the'
+Det_PL -> 'the'
+N_SG -> 'boy' | 'girl'
+N_PL -> 'boys' | 'girls'
+V_SG -> 'plays' | 'sings'
+V_PL -> 'play' | 'sing'
+""")
+
+parser = nltk.ChartParser(grammar)
+
+sentence = input("Enter a sentence: ").lower().split()
+
+print("Input Sentence:", " ".join(sentence))
+
+if list(parser.parse(sentence)):
+    print("The sentence has correct subject-verb agreement.")
+else:
+    print("The sentence has incorrect subject-verb agreement.")
