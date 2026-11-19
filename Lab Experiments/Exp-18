@@ -1,0 +1,23 @@
+
+import re
+
+def parse_fopc(expression):
+    pattern = r'^(FORALL|EXISTS)\s+([a-zA-Z]+)\s*\((.*)\)$'
+
+    match = re.match(pattern, expression)
+
+    if match:
+        quantifier = match.group(1)
+        variable = match.group(2)
+        predicate = match.group(3)
+
+        print("Logical Expression:", expression)
+        print("Quantifier:", quantifier)
+        print("Variable:", variable)
+        print("Predicate:", predicate)
+    else:
+        print("Invalid logical expression")
+
+expression = input("Enter a logical expression: ")
+
+parse_fopc(expression)
