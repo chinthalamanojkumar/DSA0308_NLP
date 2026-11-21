@@ -1,0 +1,17 @@
+import spacy
+
+nlp = spacy.load("en_core_web_sm")
+
+text = "John bought a laptop. He uses it every day."
+
+doc = nlp(text)
+
+print("Original Text:", text)
+print("\nReference Resolution:")
+
+for token in doc:
+    if token.pos_ == "PRON":
+        if token.text.lower() == "he":
+            print(token.text, "refers to John")
+        elif token.text.lower() == "it":
+            print(token.text, "refers to laptop")
