@@ -1,0 +1,29 @@
+from nltk.tokenize import sent_tokenize
+from nltk import download
+
+download('punkt')
+download('punkt_tab')
+
+text = "Artificial intelligence is growing rapidly. "
+text += "It is used in healthcare and education. "
+text += "These applications help people in daily life."
+
+sentences = sent_tokenize(text)
+
+print("Given Text:")
+print(text)
+
+print("\nCoherence Evaluation:")
+
+for i in range(len(sentences) - 1):
+    words1 = set(sentences[i].lower().split())
+    words2 = set(sentences[i + 1].lower().split())
+
+    common = words1.intersection(words2)
+
+    print("Sentence", i + 1, "and Sentence", i + 2)
+
+    if common:
+        print("Coherent")
+    else:
+        print("Less Coherent")
